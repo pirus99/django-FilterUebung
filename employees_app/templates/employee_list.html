@@ -1,27 +1,79 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Staff Filter App</title>
-  </head>
-  <body>
-    <h1>Staff Filter App</h1>
 
-    <h2>Aufgaben:</h2>
-    <ol>
-      <li>Zeige hier im Template eine Liste aller Mitarbeiter, ihrer Abteilung und ihres Gehalts an.</li>
-      <li>Zeige eine Liste der Namen aller Mitarbeiter, die mehr als 3000 € im Monat verdienen.</li>
-      <li>Wie hoch ist die Anzahl der Mitarbeiter, die 5000 € im Monat oder mehr verdienen?</li>
-    </ol>
-    <h3>Zusatzaufgaben:</h3>
-    <ol start="4">
-      <li>Wie hoch ist das Durchschnittsgehalt aller Mitarbeiter im Sales-Team? Zeige das Ergebnis auf zwei Nachkommastellen gerundet an.</li>
-      <li>Welche Mitarbeiter wurden vor dem 1. Januar 2022 eingestellt und gehören NICHT zur Abteilung HR?</li>
-    </ol>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Filter App</title>
+</head>
 
-    <h2 style="color:red">Antworten:</h2>
+<body>
+  <h1>Staff Filter App</h1>
 
-    <!-- Hier eure Antworten rendern -->
-  </body>
+  <h2>Aufgaben:</h2>
+  <ol>
+    <li>Zeige hier im Template eine Liste aller Mitarbeiter, ihrer Abteilung und ihres Gehalts an.</li>
+    <li>Zeige eine Liste der Namen aller Mitarbeiter, die mehr als 3000 € im Monat verdienen.</li>
+    <li>Wie hoch ist die Anzahl der Mitarbeiter, die 5000 € im Monat oder mehr verdienen?</li>
+  </ol>
+  <h3>Zusatzaufgaben:</h3>
+  <ol start="4">
+    <li>Wie hoch ist das Durchschnittsgehalt aller Mitarbeiter im Sales-Team? Zeige das Ergebnis auf zwei
+      Nachkommastellen gerundet an.</li>
+    <li>Welche Mitarbeiter wurden vor dem 1. Januar 2022 eingestellt und gehören NICHT zur Abteilung HR?</li>
+  </ol>
+
+  <h2 style="color:red">Antworten:</h2>
+
+  <!-- Hier eure Antworten rendern -->
+
+  <h2>Lösungen:</h2>
+  <h3>1.</h3>
+
+  <div class="list-container" id="list-container_1">
+    <ul>
+      {% for employee in employees %}
+      <li>{{ employee.name }} - {{ employee.department }} - {{ employee.salary }} €</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <h3>2.</h3>
+
+  <div class="list-container">
+    <ul>
+      {% for employee in employees %}
+      {% if employee.salary > 3000 %}
+      <li>{{ employee.name }}</li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <h3>3.</h3>
+
+  <div class="list-container" id="list-container2">
+    <p>
+      Anzahl der Mitarbeiter mit Gehalt ≥ 5000 €: {{ high_earners|length }}
+    </p>
+  </div>
+
+  <h2>Zusatzaufgaben:</h2>
+
+  <h3>4.</h3>
+
+  <div class="list-container">
+    <p>
+      Durchschnittsgehalt im Sales-Team: {{ average_salary|floatformat:2 }} €
+    </p>
+  </div>
+
+  <h3>5.</h3>
+  <div class="list-container">
+    <p>
+      Anzahl der Mitarbeiter die dieses Jahr eingestellt wurden: {{ hired_this_year|length }} 
+    </p>
+  </div>
+</body>
+
 </html>
